@@ -61,14 +61,25 @@ public class OrderRepo {
             if(entry.getValue().equals(partnerId))
                 itr.remove();
         }
+
     }
 
     public void deleteOrderById(String orderId) {
         orderMap.remove(orderId);
+        String dpId= orderPartnerMap.get(orderId);
+        if(dpId != null){
+            DeliveryPartner dp = deliveryPartnerMap.get(dpId);
+            dp.setNumberOfOrders(dp.getNumberOfOrders() - 1);
+            deliveryPartnerMap.put(dpId,dp);
+        }
         orderPartnerMap.remove(orderId);
     }
 
     public Integer getOrderCountByPartnerId(String partnerId) {
         return deliveryPartnerMap.get(partnerId).getNumberOfOrders();
+    }
+
+    public Integer getCountOfUnassignedOrders() {
+        return orderMap.size() - orderPartnerMap.size();
     }
 }

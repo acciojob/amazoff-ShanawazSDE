@@ -47,6 +47,7 @@ public class OrderService {
 //                count++;
 //        }
 //        return count;
+
         return orderRepo.getOrderCountByPartnerId(partnerId);
     }
 
@@ -66,16 +67,8 @@ public class OrderService {
     }
 
     public Integer getCountOfUnassignedOrders() {
-        List<String> orderList = getAllOrders();
-        Map<String,String> map = orderRepo.getOrderPartnerMap();
 
-        Integer count = 0;
-
-        for(String order : orderList){
-            if(!map.containsKey(order))
-                count++;
-        }
-        return count;
+        return orderRepo.getCountOfUnassignedOrders();
     }
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
@@ -101,8 +94,7 @@ public class OrderService {
         Integer last = Integer.MIN_VALUE ;
         for(String order : orders){
             Order object = orderMap.get(order);
-            if(object.getDeliveryTime() > last)
-                last = object.getDeliveryTime();
+            last = Math.max(last,object.getDeliveryTime());
         }
 
         String h = (last / 60)+"";
