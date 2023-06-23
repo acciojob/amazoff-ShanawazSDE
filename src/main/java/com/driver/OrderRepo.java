@@ -19,10 +19,12 @@ public class OrderRepo {
     }
 
     public void addOrderPartnerPair(String orderId, String partnerId) {
-        orderPartnerMap.put(orderId,partnerId);
-        DeliveryPartner dp = deliveryPartnerMap.get(partnerId);
-        dp.setNumberOfOrders(dp.getNumberOfOrders()+1);
-        deliveryPartnerMap.put(partnerId,dp);
+        if(orderMap.containsKey(orderId) && deliveryPartnerMap.containsKey(partnerId)) {
+            orderPartnerMap.put(orderId, partnerId);
+            DeliveryPartner dp = deliveryPartnerMap.get(partnerId);
+            dp.setNumberOfOrders(dp.getNumberOfOrders() + 1);
+            deliveryPartnerMap.put(partnerId, dp);
+        }
     }
 
     public Order getOrderById(String orderId) {

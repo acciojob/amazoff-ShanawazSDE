@@ -13,15 +13,12 @@ public class OrderService {
     //@Autowired
     OrderRepo orderRepo = new OrderRepo();
     public void addOrder(Order order) {
-//        if(order == null)
-//            throw new RuntimeException();
         orderRepo.addOrder(order);
 
     }
 
     public void addPartner(String partnerId) {
-        if(partnerId == null || partnerId.isEmpty())
-            throw new RuntimeException();
+
         orderRepo.addPartner(new DeliveryPartner(partnerId));
     }
 
