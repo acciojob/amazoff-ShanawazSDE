@@ -20,6 +20,9 @@ public class OrderRepo {
 
     public void addOrderPartnerPair(String orderId, String partnerId) {
         orderPartnerMap.put(orderId,partnerId);
+        DeliveryPartner dp = deliveryPartnerMap.get(partnerId);
+        dp.setNumberOfOrders(dp.getNumberOfOrders()+1);
+        deliveryPartnerMap.put(partnerId,dp);
     }
 
     public Order getOrderById(String orderId) {
@@ -39,7 +42,7 @@ public class OrderRepo {
     }
 
     public List<String> getAllOrders() {
-        return new ArrayList<>(orderMap.keySet());
+        return new ArrayList<String>(orderMap.keySet());
     }
 
     public Map<String, Order> getOrderMap() {
@@ -61,5 +64,9 @@ public class OrderRepo {
     public void deleteOrderById(String orderId) {
         orderMap.remove(orderId);
         orderPartnerMap.remove(orderId);
+    }
+
+    public Integer getOrderCountByPartnerId(String partnerId) {
+        return deliveryPartnerMap.get(partnerId).getNumberOfOrders();
     }
 }

@@ -43,13 +43,14 @@ public class OrderService {
 
 
     public Integer getOrderCountByPartnerId(String partnerId) {
-        List<String> partners = orderRepo.getAllAssignedPartners();
-        int count = 0;
-        for(String partner : partners){
-            if(partner.equals(partnerId))
-                count++;
-        }
-        return count;
+//        List<String> partners = orderRepo.getAllAssignedPartners();
+//        int count = 0;
+//        for(String partner : partners){
+//            if(partner.equals(partnerId))
+//                count++;
+//        }
+//        return count;
+        return orderRepo.getOrderCountByPartnerId(partnerId);
     }
 
     public List<String> getOrdersByPartnerId(String partnerId) {
