@@ -13,8 +13,8 @@ public class OrderService {
     //@Autowired
     OrderRepo orderRepo = new OrderRepo();
     public void addOrder(Order order) {
-        if(order == null)
-            throw new RuntimeException();
+//        if(order == null)
+//            throw new RuntimeException();
         orderRepo.addOrder(order);
 
     }
