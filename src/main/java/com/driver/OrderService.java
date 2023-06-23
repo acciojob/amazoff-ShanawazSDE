@@ -10,8 +10,8 @@ import java.util.Map;
 @Service
 public class OrderService {
 
-    @Autowired
-    OrderRepo orderRepo;
+    //@Autowired
+    OrderRepo orderRepo = new OrderRepo();
     public void addOrder(Order order) {
         if(order == null)
             throw new RuntimeException();
